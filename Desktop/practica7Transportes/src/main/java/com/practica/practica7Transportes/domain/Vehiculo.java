@@ -1,9 +1,13 @@
 package com.practica.practica7Transportes.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="Vehiculo")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Vehiculo {
     
     //Columnas
@@ -11,23 +15,19 @@ public class Vehiculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name="Color", nullable= false, length = 50)
+    @Column(name="color", nullable= false, length = 50)
     private String color;
     
-    @Column(name="Modelo", nullable= false, length = 50)
+    @Column(name="modelo", nullable= false, length = 50)
     private String modelo;
     
-    @Column(name="Peso", nullable= false, length = 50)
+    @Column(name="peso", nullable= false, length = 50)
     private double peso;
     
     //Relaciones
     @OneToOne
-    @JoinColumn(name="Transportista_Id")
+    @JoinColumn(name="transportista_id")
     private Transportista transportista;
-
-    //Constructores
-    public Vehiculo() {
-    }
 
     public Vehiculo(String color, String modelo, double peso, Transportista transportista) {
         this.color = color;

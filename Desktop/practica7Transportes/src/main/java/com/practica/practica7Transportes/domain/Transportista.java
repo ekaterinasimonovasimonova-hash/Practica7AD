@@ -2,10 +2,13 @@ package com.practica.practica7Transportes.domain;
 
 import jakarta.persistence.*;
 import java.util.*;
-import org.springframework.data.annotation.Id;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Transportista")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Transportista {
     
     //Columnas
@@ -13,15 +16,15 @@ public class Transportista {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name="Nombre", nullable=false, length = 100)
+    @Column(name="nombre", nullable=false, length = 100)
     private String nombre;
     
-    @Column(name="Apellido1", nullable=false, length = 100)
+    @Column(name="apellido1", nullable=false, length = 100)
     private String apellido1;
    
     //Relaciones
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "User_Id")
+    @JoinColumn(name = "user_id")
     private User user;
     
     @OneToOne(mappedBy = "transportista")
@@ -30,15 +33,12 @@ public class Transportista {
     @ManyToMany
     @JoinTable(
             name = "Transportista_Ruta",
-            joinColumns = @JoinColumn(name = "Transportista_Id"),
-            inverseJoinColumns = @JoinColumn(name = "Ruta_Id")
+            joinColumns = @JoinColumn(name = "transportista_id"),
+            inverseJoinColumns = @JoinColumn(name = "ruta_id")
     )
     private List<Ruta> rutas = new ArrayList<>();
 
-    //Constructores
-    public Transportista() {
-    }
-
+    // Constructores
     public Transportista(String nombre, String apellido1) {
         this.nombre = nombre;
         this.apellido1 = apellido1;

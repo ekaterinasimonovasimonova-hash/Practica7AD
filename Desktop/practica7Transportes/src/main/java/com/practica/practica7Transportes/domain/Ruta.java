@@ -3,9 +3,13 @@ package com.practica.practica7Transportes.domain;
 
 import jakarta.persistence.*;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Ruta")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ruta {
     
     //Columnas
@@ -13,19 +17,19 @@ public class Ruta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "Horas", nullable = false, length = 50)
+    @Column(name = "horas", nullable = false, length = 50)
     private double horas;
     
-    @Column(name = "Lugar de Salida", nullable = false, length = 100)
+    @Column(name = "lugarSalida", nullable = false, length = 100)
     private String lugarSalida;
     
-    @Column(name = "Lugar de Llegada", nullable = false, length = 100)
+    @Column(name = "lugarLlegada", nullable = false, length = 100)
     private String lugarLlegada;
     
-    @Column(name = "Hora de Salida", nullable = false, length = 100)
+    @Column(name = "horaSalida", nullable = false, length = 100)
     private String horaSalida;
     
-    @Column(name = "Hora de Llegada", nullable = false, length = 100)
+    @Column(name = "horaLlegada", nullable = false, length = 100)
     private String horaLlegada;
     
     //Relaciones
@@ -33,9 +37,6 @@ public class Ruta {
     private List<Transportista> transportista;
 
     //Constructores
-    public Ruta() {
-    }
-
     public Ruta(double horas, String lugarSalida, String lugarLlegada, String horaSalida, String horaLlegada) {
         this.horas = horas;
         this.lugarSalida = lugarSalida;

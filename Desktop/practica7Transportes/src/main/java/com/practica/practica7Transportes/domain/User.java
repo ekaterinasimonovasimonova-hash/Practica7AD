@@ -3,9 +3,13 @@ package com.practica.practica7Transportes.domain;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name ="User")
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     
     //Columnas
@@ -33,9 +37,6 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     //Constructores
-    public User(){
-    }
-
     public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
