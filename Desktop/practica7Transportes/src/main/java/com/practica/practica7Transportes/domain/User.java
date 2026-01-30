@@ -25,6 +25,9 @@ public class User {
 
     @Column(unique = true, nullable = false, length = 100)
     private String email;
+    
+    @Column(nullable = false)
+    private boolean enabled = true;
 
     //Relaciones
     @OneToOne(mappedBy = "user")
@@ -83,6 +86,15 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+    
     public Transportista getTransportista() {
         return transportista;
     }
@@ -100,6 +112,6 @@ public class User {
     }
 
     public enum Role {
-        GERENTE, TRANSPORTISTA
+        ADMIN, TRANSPORTISTA
     }
 }

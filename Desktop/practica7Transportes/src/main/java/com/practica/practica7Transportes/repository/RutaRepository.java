@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RutaRepository extends JpaRepository<Ruta, Long>{
     
-    List<Ruta> findByTransportistasId(Long transportistaId);
+    List<Ruta> findByTransportistaId(Long transportistaId);
+
+    List<Ruta> findByTransportistaUserId(Long userId);
     
     
 }
