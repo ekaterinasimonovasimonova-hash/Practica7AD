@@ -2,9 +2,11 @@ package com.practica.practica7Transportes.service;
 
 import com.practica.practica7Transportes.domain.Vehiculo;
 import com.practica.practica7Transportes.domain.User;
+import com.practica.practica7Transportes.repository.TransportistaRepository;
 import com.practica.practica7Transportes.repository.VehiculoRepository;
 import com.practica.practica7Transportes.security.UserContext;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -13,10 +15,13 @@ import java.util.Set;
 public class VehiculoService {
 
     private final VehiculoRepository vehiculoRepository;
+    private final TransportistaRepository transportistaRepository;
     private final UserContext userContext;
 
-    public VehiculoService(VehiculoRepository vehiculoRepository, UserContext userContext) {
+    public VehiculoService(VehiculoRepository vehiculoRepository,
+            TransportistaRepository transportistaRepository, UserContext userContext) {
         this.vehiculoRepository = vehiculoRepository;
+        this.transportistaRepository = transportistaRepository;
         this.userContext = userContext;
     }
 
@@ -43,7 +48,6 @@ public class VehiculoService {
             throw new RuntimeException("No existe vehículo o "
                     + "no tienes permisos suficientes para ver este vehículo");
         }
-
         return vehiculo;
     }
 
@@ -69,5 +73,20 @@ public class VehiculoService {
             throw new RuntimeException("Solo ADMIN puede eliminar vehículos");
         }
         vehiculoRepository.delete(vehiculo);
+    }
+    @Transactional
+    public List<Vehiculo> listarVehiculos() {
+        User currentUser = userContext.getCurrentUser();
+        if (!isAdmin(currentUser.getRoles())) {
+            throw new RuntimeException("Solo ADMIN puede listar vehículos");
+        }
+        return vehiculoRepository.findAll();
+    }
+
+    @Transactional
+    public Vehiculo verMiVehiculo() {
+        User currentUser = userContext.getCurrentUser();
+        return vehiculoRepository.findByTransportistaUserId(currentUser.getId())
+                .orElseThrow(() -> new RuntimeException("No tienes un vehículo asignado"));
     }
 }

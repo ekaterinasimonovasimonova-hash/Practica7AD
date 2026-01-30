@@ -9,6 +9,6 @@ public interface VehiculoRepository extends JpaRepository<Vehiculo, Long>{
     
     Optional<Vehiculo> findByTransportistaId(Long transportistaId);
 
-    public List<Vehiculo> findByTransportistaUserId(Long id);
+    Optional<Vehiculo> findByTransportistaUserId(Long id);
     
 }

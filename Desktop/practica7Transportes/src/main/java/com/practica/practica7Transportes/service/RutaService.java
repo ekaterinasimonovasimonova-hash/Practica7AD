@@ -50,7 +50,6 @@ public class RutaService {
                         + "no tienes permisos suficientes para ver esta ruta");
             }
         }
-
         return ruta;
     }
 
@@ -81,7 +80,7 @@ public class RutaService {
         rutaRepository.delete(ruta);
     }
 
-    public List<Ruta> listarTodas() {
+    public List<Ruta> listarRutas() {
         User currentUser = userContext.getCurrentUser();
         Set<User.Role> roles = currentUser.getRoles();
 

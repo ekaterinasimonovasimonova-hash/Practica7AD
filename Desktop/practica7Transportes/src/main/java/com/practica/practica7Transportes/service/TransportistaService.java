@@ -1,8 +1,12 @@
 package com.practica.practica7Transportes.service;
 
+import com.practica.practica7Transportes.domain.Ruta;
 import com.practica.practica7Transportes.domain.Transportista;
 import com.practica.practica7Transportes.domain.User;
+import com.practica.practica7Transportes.domain.Vehiculo;
+import com.practica.practica7Transportes.repository.RutaRepository;
 import com.practica.practica7Transportes.repository.TransportistaRepository;
+import com.practica.practica7Transportes.repository.VehiculoRepository;
 import com.practica.practica7Transportes.security.UserContext;
 import jakarta.transaction.Transactional;
 import java.util.Set;
@@ -12,10 +16,15 @@ import org.springframework.stereotype.Service;
 public class TransportistaService {
     
     private final TransportistaRepository transportistaRepository;
+    private final VehiculoRepository vehiculoRepository;
+    private final RutaRepository rutaRepository;
     private final UserContext userContext;
 
-    public TransportistaService(TransportistaRepository transportistaRepository, UserContext userContext) {
+    public TransportistaService(TransportistaRepository transportistaRepository,
+            VehiculoRepository vehiculoRepository,RutaRepository rutaRepository, UserContext userContext) {
         this.transportistaRepository = transportistaRepository;
+        this.vehiculoRepository = vehiculoRepository;
+        this.rutaRepository = rutaRepository;
         this.userContext = userContext;
     }
 
@@ -67,6 +76,51 @@ public class TransportistaService {
         transportistaRepository.delete(transportista);
     }
     
+    @Transactional
+    public void asignarVehiculo(Long transportistaId, Long vehiculoId) {
+        User currentUser = userContext.getCurrentUser();
+        if (!isAdmin(currentUser.getRoles())) {
+            throw new RuntimeException("Solo ADMIN puede asignar vehículos");
+        }
+
+        Transportista transportista = buscarPorId(transportistaId);
+        Vehiculo vehiculo = vehiculoRepository.findById(vehiculoId)
+                .orElseThrow(() -> new RuntimeException("Vehículo no encontrado"));
+
+        transportista.setVehiculo(vehiculo);
+        transportistaRepository.save(transportista);
+    }
+    @Transactional
+    public void asignarRuta(Long transportistaId, Long rutaId) {
+        User currentUser = userContext.getCurrentUser();
+        if (!isAdmin(currentUser.getRoles())) {
+            throw new RuntimeException("Solo ADMIN puede asignar rutas");
+        }
+
+        Transportista transportista = buscarPorId(transportistaId);
+        Ruta ruta = rutaRepository.findById(rutaId)
+                .orElseThrow(() -> new RuntimeException("Ruta no encontrada"));
+
+        transportista.getRutas().add(ruta); 
+        transportistaRepository.save(transportista);
+    }
+    @Transactional
+    public void desasignarRuta(Long transportistaId, Long rutaId) {
+        User currentUser = userContext.getCurrentUser();
+        if (!isAdmin(currentUser.getRoles())) {
+            throw new RuntimeException("Solo ADMIN puede desasignar rutas");
+        }
+
+        Transportista transportista = buscarPorId(transportistaId);
+        Ruta ruta = rutaRepository.findById(rutaId)
+                .orElseThrow(() -> new RuntimeException("Ruta no encontrada"));
+
+        transportista.getRutas().remove(ruta);
+        transportistaRepository.save(transportista);
+    }
+
+
+
     @Transactional
     public Transportista verMisDatos() {
     User currentUser = userContext.getCurrentUser();

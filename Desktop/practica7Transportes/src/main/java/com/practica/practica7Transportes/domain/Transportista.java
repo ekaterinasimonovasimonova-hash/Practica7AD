@@ -36,7 +36,7 @@ public class Transportista {
             joinColumns = @JoinColumn(name = "transportista_id"),
             inverseJoinColumns = @JoinColumn(name = "ruta_id")
     )
-    private List<Ruta> rutas = new ArrayList<>();
+    private Set<Ruta> rutas = new HashSet<>();
 
     // Constructores
     public Transportista(String nombre, String apellido1) {
@@ -85,11 +85,11 @@ public class Transportista {
         this.vehiculo = vehiculo;
     }
 
-    public List<Ruta> getRutas() {
+    public Set<Ruta> getRutas() {
         return rutas;
     }
 
-    public void setRutas(List<Ruta> rutas) {
+    public void setRutas(Set<Ruta> rutas) {
         this.rutas = rutas;
     }    
 }
