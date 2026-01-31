@@ -9,6 +9,4 @@ public interface RutaRepository extends JpaRepository<Ruta, Long>{
     List<Ruta> findByTransportistaId(Long transportistaId);
 
     List<Ruta> findByTransportistaUserId(Long userId);
-    
-    
 }

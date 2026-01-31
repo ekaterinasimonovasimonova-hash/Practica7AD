@@ -39,10 +39,18 @@ public class RutaController {
         rutaService.eliminarRuta(id);
     }
 
-    //Listar todas las rutas o solo mis rutas
+    //Listar para ADMIN
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN') or hasRole('TRANSPORTISTA')")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Ruta> listar() {
+        return rutaService.listarRutas();
+    }
+    
+    
+    //Listar para TRANSPORTISTA
+    @GetMapping("/mis-rutas")
+    @PreAuthorize("hasRole('TRANSPORTISTA')")
+    public List<Ruta> listarMisRutas() {
         return rutaService.listarRutas();
     }
 

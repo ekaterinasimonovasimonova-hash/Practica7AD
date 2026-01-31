@@ -90,6 +90,19 @@ public class TransportistaService {
         transportista.setVehiculo(vehiculo);
         transportistaRepository.save(transportista);
     }
+    
+    @Transactional
+    public void desasignarVehiculo(Long transportistaId) {
+        Transportista t = transportistaRepository.findById(transportistaId)
+            .orElseThrow(() -> new RuntimeException("Transportista no encontrado"));
+
+        Vehiculo v = t.getVehiculo();
+        if (v != null) {
+            v.setTransportista(null);   
+            vehiculoRepository.save(v);  
+        }
+    }
+
     @Transactional
     public void asignarRuta(Long transportistaId, Long rutaId) {
         User currentUser = userContext.getCurrentUser();
@@ -104,6 +117,7 @@ public class TransportistaService {
         transportista.getRutas().add(ruta); 
         transportistaRepository.save(transportista);
     }
+    
     @Transactional
     public void desasignarRuta(Long transportistaId, Long rutaId) {
         User currentUser = userContext.getCurrentUser();
@@ -118,9 +132,7 @@ public class TransportistaService {
         transportista.getRutas().remove(ruta);
         transportistaRepository.save(transportista);
     }
-
-
-
+    
     @Transactional
     public Transportista verMisDatos() {
     User currentUser = userContext.getCurrentUser();

@@ -25,7 +25,7 @@ public class TransportistaController {
 
     //Consultar datos
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('TRANSPORTISTA')")
+    @PreAuthorize("hasRole('ADMIN')")
     public Transportista buscarPorId(@PathVariable Long id) {
         return transportistaService.buscarPorId(id);
     }
@@ -56,6 +56,12 @@ public class TransportistaController {
     ) {
         transportistaService.asignarVehiculo(id, vehiculoId);
     }
+    //Desasisgnar vehículo
+    @DeleteMapping("/{id}/vehiculo")
+    @PreAuthorize("hasRole('ADMIN')")
+    public void desasignarVehiculo(@PathVariable Long id) {
+        transportistaService.desasignarVehiculo(id);
+    }
 
     //Asignar ruta
     @PutMapping("/{id}/rutas/{rutaId}")
@@ -81,7 +87,6 @@ public class TransportistaController {
     @GetMapping("/me")
     @PreAuthorize("hasRole('TRANSPORTISTA')")
     public Transportista verMisDatos() {
-        
     return transportistaService.verMisDatos();
     }
 }

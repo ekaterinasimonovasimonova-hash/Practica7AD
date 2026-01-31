@@ -20,7 +20,7 @@ public class RegisterRequest {
     @Email(message = "Email should be valid")
     private String email;
     
-    private User.Role role; // Optional role, defaults to ALUMNO
+    private User.Role role; // Optional role, defaults to TRANSPORTISTA
 
     public RegisterRequest() {}
 
@@ -61,5 +61,4 @@ public class RegisterRequest {
     public void setRole(User.Role role) {
         this.role = role;
     }
-    
 }

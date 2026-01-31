@@ -54,7 +54,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/transportista/**").authenticated()
+                .requestMatchers("/api/transportistas/**").authenticated()
                 .requestMatchers("/**").permitAll() // Allow Vaadin routes
                 .anyRequest().authenticated()
             )
