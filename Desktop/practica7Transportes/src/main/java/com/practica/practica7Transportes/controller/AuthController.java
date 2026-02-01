@@ -28,8 +28,8 @@ public class AuthController {
                     request.getUsername(),
                     request.getPassword(),
                     request.getEmail(),
-                    // Añadido por defecto para luego asignar rol en login
-                    Role.TRANSPORTISTA
+                    request.getRole()
+            
             );
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {

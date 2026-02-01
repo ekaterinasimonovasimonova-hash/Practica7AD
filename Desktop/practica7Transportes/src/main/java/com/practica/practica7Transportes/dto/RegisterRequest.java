@@ -20,14 +20,15 @@ public class RegisterRequest {
     @Email(message = "Email should be valid")
     private String email;
     
-    private User.Role role; // Optional role, defaults to TRANSPORTISTA
+    private User.Role role;
 
     public RegisterRequest() {}
 
-    public RegisterRequest(String username, String password, String email) {
+    public RegisterRequest(String username, String password, String email, User.Role role) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.role = role; //Para recoger el rol
     }
 
     public String getUsername() {

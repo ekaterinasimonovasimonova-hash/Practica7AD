@@ -20,28 +20,28 @@ public class RutaController {
 
     //Crear ruta
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Ruta crear(@RequestBody Ruta ruta) {
         return rutaService.crearRuta(ruta);
     }
 
     //Modificar ruta
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Ruta actualizar(@PathVariable Long id, @RequestBody Ruta ruta) {
         return rutaService.actualizarRuta(id, ruta);
     }
 
     //Eliminar ruta
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void eliminar(@PathVariable Long id) {
         rutaService.eliminarRuta(id);
     }
 
     //Listar para ADMIN
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<Ruta> listar() {
         return rutaService.listarRutas();
     }
@@ -49,14 +49,14 @@ public class RutaController {
     
     //Listar para TRANSPORTISTA
     @GetMapping("/mis-rutas")
-    @PreAuthorize("hasRole('TRANSPORTISTA')")
+    @PreAuthorize("hasAuthority('ROLE_TRANSPORTISTA')")
     public List<Ruta> listarMisRutas() {
         return rutaService.listarRutas();
     }
 
     //Consultar ruta por ID
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('TRANSPORTISTA')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_TRANSPORTISTA')")
     public Ruta buscarPorId(@PathVariable Long id) {
         return rutaService.buscarPorId(id);
     }

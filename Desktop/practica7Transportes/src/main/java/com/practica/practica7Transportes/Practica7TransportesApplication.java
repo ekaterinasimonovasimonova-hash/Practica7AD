@@ -29,7 +29,7 @@ public class Practica7TransportesApplication {
         String formatoFila = "| %-" + wMetodo + "s | %-" + wRuta + "s | %-" + wHandler + "s |%n";
 
         System.out.println("\n" + lineaHorizontal);
-        System.out.printf(formatoFila, "MÉTODO", "RUTA", "HANDLER");
+        System.out.printf(formatoFila, "METODO", "RUTA", "HANDLER");
         System.out.println(lineaHorizontal);
 
         RequestMappingHandlerMapping mapping = context.getBean(RequestMappingHandlerMapping.class);

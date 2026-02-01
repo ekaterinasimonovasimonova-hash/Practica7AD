@@ -20,42 +20,42 @@ public class VehiculoController {
 
     //Crear vehículo
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Vehiculo crear(@RequestBody Vehiculo vehiculo) {
         return vehiculoService.crearVehiculo(vehiculo);
     }
 
     //Consultar vehículo por id
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('TRANSPORTISTA')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_TRANSPORTISTA')")
     public Vehiculo buscarPorId(@PathVariable Long id) {
         return vehiculoService.buscarPorId(id);
     }
 
     //Modificar vehículo
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Vehiculo actualizar(@PathVariable Long id, @RequestBody Vehiculo vehiculo) {
         return vehiculoService.actualizarVehiculo(id, vehiculo);
     }
 
     //Eliminar vehículo
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void eliminar(@PathVariable Long id) {
         vehiculoService.eliminarVehiculo(id);
     }
 
     //Listar vehículos
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<Vehiculo> listarTodos() {
         return vehiculoService.listarVehiculos();
     }
 
     //Consultar el vehículo asignado al transportista
     @GetMapping("/mio")
-    @PreAuthorize("hasRole('TRANSPORTISTA')")
+    @PreAuthorize("hasAuthority('ROLE_TRANSPORTISTA')")
     public Vehiculo verMiVehiculo() {
         return vehiculoService.verMiVehiculo();
     }

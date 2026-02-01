@@ -18,21 +18,21 @@ public class TransportistaController {
 
     //Crear transportista
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Transportista crear(@RequestBody Transportista transportista) {
         return transportistaService.crearTransportista(transportista);
     }
 
     //Consultar datos
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Transportista buscarPorId(@PathVariable Long id) {
         return transportistaService.buscarPorId(id);
     }
 
     //Modificar transportista
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Transportista actualizar(
             @PathVariable Long id,
             @RequestBody Transportista transportista
@@ -42,14 +42,14 @@ public class TransportistaController {
 
     //Eliminar transportista
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void eliminar(@PathVariable Long id) {
         transportistaService.eliminarTransportista(id);
     }
 
     //Asignar vehículo
     @PutMapping("/{id}/vehiculo/{vehiculoId}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void asignarVehiculo(
             @PathVariable Long id,
             @PathVariable Long vehiculoId
@@ -58,14 +58,14 @@ public class TransportistaController {
     }
     //Desasisgnar vehículo
     @DeleteMapping("/{id}/vehiculo")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void desasignarVehiculo(@PathVariable Long id) {
         transportistaService.desasignarVehiculo(id);
     }
 
     //Asignar ruta
     @PutMapping("/{id}/rutas/{rutaId}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void asignarRuta(
             @PathVariable Long id,
             @PathVariable Long rutaId
@@ -75,7 +75,7 @@ public class TransportistaController {
     
     //Desasignar ruta
     @DeleteMapping("/{id}/rutas/{rutaId}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void desasignarRuta(
             @PathVariable Long id,
             @PathVariable Long rutaId
@@ -85,7 +85,7 @@ public class TransportistaController {
 
     //Ver mis datos
     @GetMapping("/me")
-    @PreAuthorize("hasRole('TRANSPORTISTA')")
+    @PreAuthorize("hasAuthority('ROLE_TRANSPORTISTA')")
     public Transportista verMisDatos() {
     return transportistaService.verMisDatos();
     }
