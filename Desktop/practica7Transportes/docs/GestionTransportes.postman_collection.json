@@ -1,0 +1,88 @@
+{
+  "info": {
+    "_postman_id": "580f9d68-b055-4b7b-b47b-353702bdb50b",
+    "name": "GestionTransportes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51904773",
+    "_collection_link": "https://go.postman.co/collection/51904773-580f9d68-b055-4b7b-b47b-353702bdb50b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CrearVehiculo",
+      "request": {
+        "method": "POST",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "CrearTransportista",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6IkthdGlhIiwiaWF0IjoxNzY5OTcyNzM3LCJleHAiOjE3NzAwNTkxMzd9.YzYm2RsVX-T7l6eBz8LnLgMim4BHtCa2pys5UKulA-SJxEBNjKrkLHlabxPaLnzzCrCCqQgHRXdYV4sEVVttWg",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Lukas\",\r\n  \"apellido1\": \"Dominguez\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/transportistas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "transportistas"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

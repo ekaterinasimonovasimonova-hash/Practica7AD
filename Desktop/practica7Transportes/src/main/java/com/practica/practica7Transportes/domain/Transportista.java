@@ -44,6 +44,13 @@ public class Transportista {
         this.apellido1 = apellido1;
     }
 
+    public Transportista(String nombre, String apellido1, User user, Vehiculo vehiculo) {
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.user = user;
+        this.vehiculo = vehiculo;
+    }
+
     //Setters y getters
     public Long getId() {
         return id;

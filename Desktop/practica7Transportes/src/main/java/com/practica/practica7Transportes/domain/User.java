@@ -44,7 +44,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.roles.add(role);
+        this.roles.add(role); //Recojo el rol
     }
 
     // Getters y setters

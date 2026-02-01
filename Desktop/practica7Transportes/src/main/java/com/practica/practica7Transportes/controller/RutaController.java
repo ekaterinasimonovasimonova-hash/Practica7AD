@@ -20,7 +20,7 @@ public class RutaController {
 
     //Crear ruta
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')") //Añado el hasAuthority para recoger el rol del token
     public Ruta crear(@RequestBody Ruta ruta) {
         return rutaService.crearRuta(ruta);
     }
